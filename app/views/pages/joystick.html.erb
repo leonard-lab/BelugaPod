@@ -1,0 +1,26 @@
+<%= content_for :page_css do %>
+  <%= stylesheet_link_tag "joystick" %>
+<% end %>
+
+<%= content_for :page_js do %>
+  <%= javascript_include_tag "joystick" %>
+<% end %>
+
+<div id="container">
+  <div id="header">
+    <h2>Beluga Joystick Control</h2>
+  </div>
+
+  <div id="XYContainer">
+    X-Y
+    <div id="XY">
+      <%= image_tag "green_dot.png", :id => "green_dot" %>
+    </div>
+  </div>
+
+  <br/>
+
+  <div id="bottom">
+    <button id="EnableXY" title="Enable">Enable</button>
+  </div>
+</div>
