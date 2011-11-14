@@ -1,12 +1,11 @@
 div#container
 {
-    width: 600px;
+    width: 375px;
 }
 
 div#header
 {
     text-align: center;
-    padding-bottom: 20px;
 }
 
 div#XYContainer
@@ -24,12 +23,22 @@ div#XY
     height: 300px;
 }
 
-img#green_dot
+div#ZContainer
 {
-    display: none;
+    padding-left: 20px;
+}
+
+div#Z
+{
+    text-align: left;
+    background-color: lightblue;
+    border: 1px solid black;
+    width: 20px;
+    height: 300px;
 }
 
 div#bottom
 {
+    padding-top: 10px;
     text-align: center;
 }

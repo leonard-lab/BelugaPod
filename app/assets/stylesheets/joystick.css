@@ -1,9 +1,8 @@
 div#container {
-  width: 600px; }
+  width: 375px; }
 
 div#header {
-  text-align: center;
-  padding-bottom: 20px; }
+  text-align: center; }
 
 div#XYContainer {
   width: 300px;
@@ -16,8 +15,16 @@ div#XY {
   width: 300px;
   height: 300px; }
 
-img#green_dot {
-  display: none; }
+div#ZContainer {
+  padding-left: 20px; }
+
+div#Z {
+  text-align: left;
+  background-color: lightblue;
+  border: 1px solid black;
+  width: 20px;
+  height: 300px; }
 
 div#bottom {
+  padding-top: 10px;
   text-align: center; }

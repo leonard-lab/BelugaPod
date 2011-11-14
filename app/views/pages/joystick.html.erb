@@ -11,16 +11,34 @@
     <h2>Beluga Joystick Control</h2>
   </div>
 
-  <div id="XYContainer">
-    X-Y
-    <div id="XY">
-      <%= image_tag "green_dot.png", :id => "green_dot" %>
-    </div>
-  </div>
+  <table>
+    <tr>
+      <td>
+        <div id="XYContainer">
+          X-Y
+          <div id="XY">
+            <%= image_tag "green_dot.png", :id => "green_dot" %>
+          </div>
+        </div>
+      </td>
 
-  <br/>
+      <td>
+        <div id="ZContainer">
+          Z
+          <div id="Z">
+            <%= image_tag "red_dot.png", :id => "red_dot" %>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </table>
+
 
   <div id="bottom">
-    <button id="EnableXY" title="Enable">Enable</button>
+    X:  <span id="Xlabel">0</span>, Y:  <span id="Ylabel">0</span>,  Z: <span id="Zlabel">0</span>
+    <br/>
+    <button id="Enable" title="Enable">Enable</button>
+    <button id="Zero" title="Enable">Zero</button>
   </div>
+
 </div>
