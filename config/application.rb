@@ -52,5 +52,15 @@ module WhalesOnRails
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    @socket = nil
+    def socket
+      unless @socket
+        @socket = TCPSocket.open('127.0.0.1', 1234)
+        @socket.gets
+      end
+      return @socket
+    end
+
   end
 end

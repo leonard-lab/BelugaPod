@@ -15,13 +15,13 @@ $(document).ready(function(){
         g_Enabled = false;
     });
     
-    $("#Zero").click(function(){
+    $("#Zero").unbind("click").click(function(){
         moveGreenDotTo(0, 0);
         moveRedDotTo(0);
         $("form#new_kinematic").submit();        
     });
 
-    $("#XY").click(function(ev){
+    $("#XY").unbind("click").click(function(ev){
         if(g_Enabled)
         {
             var X = ev.pageX;
@@ -33,7 +33,7 @@ $(document).ready(function(){
         }
     });
 
-    $("#Z").click(function(ev){
+    $("#Z").unbind("click").click(function(ev){
         if(g_Enabled)
         {
             var Y = ev.pageY;
@@ -78,7 +78,6 @@ function moveGreenDotTo(x, y)
     $("#kinematic_speed").val(y);
     $("#kinematic_omega").val(x);
 
-    $("form#new_kinematic").submit();
 }
 
 function moveRedDotTo(y)
