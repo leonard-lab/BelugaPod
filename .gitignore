@@ -1,0 +1,12 @@
+.bundle
+db/*.sqlite3
+log/*.log
+tmp/
+doc/*.aux
+doc/*.log
+doc/*.toc
+doc/*.synctex.gz
+.sass-cache
+webrat.log
+vendor/bundle
+.DS_Store
