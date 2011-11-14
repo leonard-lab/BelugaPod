@@ -3,6 +3,8 @@ g_Enabled = false;
 $(document).ready(function(){
     $("#Zero").button();
 
+    $("#set_kinematics").button();
+    
     $("#Enable").button().toggle(function() {
         $(this).button('option', 'label', 'Disable');
         g_Enabled = true;
@@ -16,6 +18,7 @@ $(document).ready(function(){
     $("#Zero").click(function(){
         moveGreenDotTo(0, 0);
         moveRedDotTo(0);
+        $("form#new_kinematic").submit();        
     });
 
     $("#XY").click(function(ev){
@@ -26,6 +29,7 @@ $(document).ready(function(){
             X -= $("#XY").position().left + 0.5*$("#XY").width() - 7.5;
             Y -= $("#XY").position().top + 0.5*$("#XY").height() + 7.5;
             moveGreenDotTo(X, Y);
+            $("form#new_kinematic").submit();                
         }
     });
 
@@ -35,6 +39,7 @@ $(document).ready(function(){
             var Y = ev.pageY;
             Y -= $("#Z").position().top + 0.5*$("#Z").height() + 7.5;
             moveRedDotTo(Y);
+            $("form#new_kinematic").submit();                
         }
     });
 
@@ -56,8 +61,24 @@ function moveGreenDotTo(x, y)
         offset: off
     });
 
+    y = -y;
+
     $("#Xlabel").text(x);
-    $("#Ylabel").text(y);    
+    $("#Ylabel").text(y);
+
+    x = x/(0.5*parseFloat($("#XY").width()));
+    y = y/(0.5*parseFloat($("#XY").height()));    
+
+    var s_max = parseFloat($("#kinematic_max_speed").val());
+    var o_max = parseFloat($("#kinematic_max_omega").val());
+
+    x = x*o_max;
+    y = y*s_max;
+
+    $("#kinematic_speed").val(y);
+    $("#kinematic_omega").val(x);
+
+    $("form#new_kinematic").submit();
 }
 
 function moveRedDotTo(y)
@@ -73,7 +94,18 @@ function moveRedDotTo(y)
         offset: off
     });
 
+    y = -y;
+
     $("#Zlabel").text(y);
+
+    y = y/(0.5*parseFloat($("#Z").height()));
+    
+    var zdot_max = parseFloat($("#kinematic_max_zdot").val());
+    y = y*zdot_max;
+
+    $("#kinematic_zdot").val(y);
+
+
 }
 
 function toggleEnabled()

@@ -35,8 +35,28 @@
 
 
   <div id="bottom">
+
     X:  <span id="Xlabel">0</span>, Y:  <span id="Ylabel">0</span>,  Z: <span id="Zlabel">0</span>
-    <br/>
+
+    <%= form_for @kinematic, :remote => true do |f| %>
+      <%= f.label "Speed" %>
+      <%= f.text_field :speed %> <br/>
+      <%= f.label "Turning" %>
+      <%= f.text_field :omega %> <br/>
+      <%= f.label "Vertical Speed" %>
+      <%= f.text_field :zdot %> <br/>
+
+      <%= f.label "Max Speed" %>
+      <%= f.text_field :max_speed %> <br/>
+      <%= f.label "Max Turning" %>
+      <%= f.text_field :max_omega %> <br/>
+      <%= f.label "Max Vertical Speed" %>
+      <%= f.text_field :max_zdot %> <br/>
+
+      <%= f.submit "Set Kinematics", :id => "set_kinematics" %>
+    <% end %>
+    
+   <br/>
     <button id="Enable" title="Enable">Enable</button>
     <button id="Zero" title="Enable">Zero</button>
   </div>

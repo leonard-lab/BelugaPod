@@ -3,6 +3,8 @@ WhalesOnRails::Application.routes.draw do
   match '/' => 'pages#home'
   match '/joystick' => 'pages#joystick'
   match '/waypoint' => 'pages#waypoint'
+
+  resources :kinematics
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
