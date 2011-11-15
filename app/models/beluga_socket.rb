@@ -7,7 +7,7 @@ class BelugaSocket < ActiveRecord::Base
   end
 
   def self.sock
-    WhalesOnRails::Application::socket
+    BelugaPod::Application::socket
   end
     
 end

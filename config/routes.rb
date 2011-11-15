@@ -1,4 +1,4 @@
-WhalesOnRails::Application.routes.draw do
+BelugaPod::Application.routes.draw do
 
   match '/' => 'pages#home'
   match '/joystick' => 'pages#joystick'

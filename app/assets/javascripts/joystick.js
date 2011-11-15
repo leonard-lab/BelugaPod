@@ -9,15 +9,15 @@ $(document).ready(function(){
         $(this).button('option', 'label', 'Disable');
         g_Enabled = true;
     }, function() {
-        moveGreenDotTo(0, 0);
-        moveRedDotTo(0);
+        movePuckTo(0, 0);
+        moveVSliderTo(0);
         $(this).button('option', 'label', 'Enable');
         g_Enabled = false;
     });
     
     $("#Zero").unbind("click").click(function(){
-        moveGreenDotTo(0, 0);
-        moveRedDotTo(0);
+        movePuckTo(0, 0);
+        moveVSliderTo(0);
         $("form#new_kinematic").submit();        
     });
 
@@ -28,7 +28,7 @@ $(document).ready(function(){
             var Y = ev.pageY;
             X -= $("#XY").position().left + 0.5*$("#XY").width() - 7.5;
             Y -= $("#XY").position().top + 0.5*$("#XY").height() + 7.5;
-            moveGreenDotTo(X, Y);
+            movePuckTo(X, Y);
             $("form#new_kinematic").submit();                
         }
     });
@@ -38,23 +38,23 @@ $(document).ready(function(){
         {
             var Y = ev.pageY;
             Y -= $("#Z").position().top + 0.5*$("#Z").height() + 7.5;
-            moveRedDotTo(Y);
+            moveVSliderTo(Y);
             $("form#new_kinematic").submit();                
         }
     });
 
-    moveGreenDotTo(0, 0);
-    moveRedDotTo(0);
+    movePuckTo(0, 0);
+    moveVSliderTo(0);
     
  });
 
-function moveGreenDotTo(x, y)
+function movePuckTo(x, y)
 {
     var w = 15;
     var px = x - 0.5*w;
     var py = y;
     var off = px + " " + py;
-    $("#green_dot").position({
+    $("#puck").position({
         my: "center center",
         at: "center center",
         of: "#XY",
@@ -80,15 +80,15 @@ function moveGreenDotTo(x, y)
 
 }
 
-function moveRedDotTo(y)
+function moveVSliderTo(y)
 {
     var w = 15;
-    var px = -0.5*$("#Z").width() + 0.5*w;
+    var px = 1; //-0.5*$("#Z").width() + 0.5*w;
     var py = y;
     var off = px + " " + py;
-    $("#red_dot").position({
-        my: "center center",
-        at: "center center",
+    $("#vslider").position({
+        my: "left center",
+        at: "left center",
         of: "#Z",
         offset: off
     });
