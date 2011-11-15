@@ -1,29 +1,50 @@
 class KinematicsController < ApplicationController
 
-  before_filter :ensure_ipc_connection
-
-  def create
-
-    @speed = params[:kinematic][:speed]
-    @omega = params[:kinematic][:omega]
-    @zdot = params[:kinematic][:zdot]
-
-    @sock.puts("set control kinematics 0 #{@speed} #{@omega} #{@zdot}")
-    response = @sock.gets
-
-    p response
+  def index
+    @kinematics = Kinematic.all
 
     respond_to do |format|
-      format.js { }
+      format.html do
+        if params[:short] && (params[:short] == "1" || params[:short] == "yes")
+          render :inline => @kinematics.collect{ |p| p.to_s }.join(" ")
+        end
+        
+      end
+
     end
 
   end
+  
+  def show
+    @id = params[:id]
+    @kinematic = Kinematic.find(@id)
+    
+    respond_to do |format|
+      format.html do
+        if params[:short] && (params[:short] == "1" || params[:short] == "yes")
+          render :inline => @kinematic.to_s
+        end
+      end
+    end
 
-  private
+  end
+    
+  def create
 
-  def ensure_ipc_connection
+    params[:kinematic][:id] = 0
+    
+    @kinematic = Kinematic.new(params[:kinematic])
 
-    @sock = WhalesOnRails::Application::socket
+    @kinematic.save
+
+    respond_to do |format|
+      format.html do
+        if params[:short] && (params[:short] == "1" || params[:short] == "yes")
+          render :inline => @kinematic.to_s
+        end
+      end
+      format.js { }
+    end
 
   end
 

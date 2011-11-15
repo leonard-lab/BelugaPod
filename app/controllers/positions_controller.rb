@@ -21,18 +21,12 @@ class PositionsController < ApplicationController
     
     respond_to do |format|
       format.html do
-        if params[:short] && params[:short] == "1"
+        if params[:short] && (params[:short] == "1" || params[:short] == "yes")
           render :inline => @position.to_s
         end
       end
     end
 
-  end
-
-  private
-  
-  def ensure_ipc_connection
-    @sock = WhalesOnRails::Application::socket
   end
   
 end
