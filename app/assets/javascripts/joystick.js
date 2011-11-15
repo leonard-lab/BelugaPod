@@ -1,4 +1,4 @@
-g_Enabled = false;
+var g_Enabled = false;
 
 $(document).ready(function(){
     $("#Zero").button();
@@ -6,11 +6,13 @@ $(document).ready(function(){
     $("#set_kinematics").button();
     
     $("#Enable").button().toggle(function() {
+        enableDraggables();
         $(this).button('option', 'label', 'Disable');
         g_Enabled = true;
     }, function() {
         movePuckTo(0, 0);
         moveVSliderTo(0);
+        disableDraggables();
         $(this).button('option', 'label', 'Enable');
         g_Enabled = false;
     });
@@ -24,22 +26,15 @@ $(document).ready(function(){
     $("#XY").unbind("click").click(function(ev){
         if(g_Enabled)
         {
-            var X = ev.pageX;
-            var Y = ev.pageY;
-            X -= $("#XY").position().left + 0.5*$("#XY").width() - 7.5;
-            Y -= $("#XY").position().top + 0.5*$("#XY").height() + 7.5;
-            movePuckTo(X, Y);
-            $("form#new_kinematic").submit();                
+            updateKinematicsXY(ev.pageX - 0.5*$("#XY").width() - $("#XY").position().left,
+                               ev.pageY - 0.5*$("#XY").height() - $("#XY").position().top);
         }
     });
 
     $("#Z").unbind("click").click(function(ev){
         if(g_Enabled)
         {
-            var Y = ev.pageY;
-            Y -= $("#Z").position().top + 0.5*$("#Z").height() + 7.5;
-            moveVSliderTo(Y);
-            $("form#new_kinematic").submit();                
+            updateKinematicsZ(ev.pageY - $("#Z").position().top + 0.5*$("#Z").height());
         }
     });
 
@@ -47,6 +42,66 @@ $(document).ready(function(){
     moveVSliderTo(0);
     
  });
+
+function enableDraggables()
+{
+    debugOut("Hi");
+    $("#puck").draggable({
+        containment: "#XY",
+        drag: function(){
+            updateKinematicsXY(puckCenterX(), puckCenterY());
+        }
+    });
+
+    $("#vslider").draggable({
+        axis: "y",
+        containment: "#Z",
+        drag: function(){
+            updateKinematicsZ(sliderCenterY());
+        }
+    });
+}
+
+function disableDraggables()
+{
+    $("#puck").draggable('destroy');
+    $("#vslider").draggable('destroy');    
+}
+
+function puckCenterX()
+{
+    return $("#puck").position().left - $("#XY").position().left
+        + 0.5*$("#puck").width() - 0.5*$("#XY").width();
+}
+
+function puckCenterY()
+{
+    return $("#puck").position().top - $("#XY").position().top
+        + 0.5*$("#puck").height() - 0.5*$("#XY").height();
+}
+
+function sliderCenterY()
+{
+    return $("#vslider").position().top - $("#Z").position().top
+        + 0.5*$("#vslider").height() - 0.5*$("#Z").height();
+}
+
+function debugOut(txt)
+{
+    $("#debug_out").text(txt);
+}
+
+function updateKinematicsXY(X, Y)
+{
+    movePuckTo(X, Y);
+    $("form#new_kinematic").submit();                
+}
+
+function updateKinematicsZ(Y)
+{
+    moveVSliderTo(Y);
+    $("form#new_kinematic").submit();                
+}
 
 function movePuckTo(x, y)
 {
@@ -60,12 +115,12 @@ function movePuckTo(x, y)
         of: "#XY",
         offset: off
     });
-
+    
     y = -y;
-
+    
     $("#Xlabel").text(x);
     $("#Ylabel").text(y);
-
+    
     x = x/(0.5*parseFloat($("#XY").width()));
     y = y/(0.5*parseFloat($("#XY").height()));    
 
@@ -105,17 +160,4 @@ function moveVSliderTo(y)
     $("#kinematic_zdot").val(y);
 
 
-}
-
-function toggleEnabled()
-{
-    g_Enabled = !g_Enabled;
-    if(g_Enabled == true)
-    {
-        $("#Enable .ui-button-text").text("Disable").button("refresh");
-    }
-    else
-    {
-        $("#Enable .ui-button-text").text("Enable").button("refresh");
-    }
 }
