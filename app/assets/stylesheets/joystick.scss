@@ -8,6 +8,16 @@ div#header
     text-align: center;
 }
 
+td
+{
+    vertical-align: bottom;
+}
+
+img
+{
+    position: absolute;
+}
+
 div#XYContainer
 {
     width:300px;
@@ -25,12 +35,14 @@ div#XY
 
 div#ZContainer
 {
+    text-align: center;
     padding-left: 20px;
 }
 
 div#Z
 {
-    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
     background-color: lightblue;
     border: 1px solid black;
     width: 20px;
@@ -41,4 +53,29 @@ div#bottom
 {
     padding-top: 10px;
     text-align: center;
+}
+
+div#buttons1, div#xyz, form#new_kinematic
+{
+    padding: 5px;
+}
+
+table
+{
+    width: 100%;
+}
+
+td.right_align
+{
+    text-align: right;
+}
+
+select, input
+{
+    width: 50%;
+}
+
+#set_kinematics
+{
+    margin-top: 5px;
 }
