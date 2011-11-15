@@ -55,7 +55,7 @@ module WhalesOnRails
 
     @socket = nil
     def socket
-      unless @socket
+      unless @socket && !@socket.closed?
         @socket = TCPSocket.open('127.0.0.1', 1234)
         @socket.gets
       end
