@@ -1,20 +1,28 @@
 class PositionsController < ApplicationController
 
-  before_filter :ensure_ipc_connection
-
-  def show
-    @id = params[:id]
-    @sock.puts "get position #{@id}"
-    resp = @sock.gets
-    d = %w{ resp }
-    @x = d[0].to_f
-    @y = d[1].to_f
-    @z = d[2].to_f
+  def index
+    @positions = Position.all
 
     respond_to do |format|
       format.html do
+        if params[:short] && (params[:short] == "1" || params[:short] == "yes")
+          render :inline => @positions.collect{ |p| p.to_s }.join(" ")
+        end
+        
+      end
+
+    end
+
+  end
+  
+  def show
+    @id = params[:id]
+    @position = Position.find(@id)
+    
+    respond_to do |format|
+      format.html do
         if params[:short] && params[:short] == "1"
-          render :inline => resp
+          render :inline => @position.to_s
         end
       end
     end
