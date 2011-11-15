@@ -31,8 +31,6 @@ class KinematicsController < ApplicationController
     
   def create
 
-    params[:kinematic][:id] = 0
-    
     @kinematic = Kinematic.new(params[:kinematic])
 
     @kinematic.save

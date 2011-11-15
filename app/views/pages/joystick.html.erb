@@ -39,6 +39,9 @@
     X:  <span id="Xlabel">0</span>, Y:  <span id="Ylabel">0</span>,  Z: <span id="Zlabel">0</span>
 
     <%= form_for @kinematic, :remote => true do |f| %>
+      <%= f.label "Robot" %>
+      <%= f.select :id, [['Beluga 1', 0], ['Beluga 2', 1], ['Beluga 3', 2], ['Beluga 4', 4]] %><br/>
+      
       <%= f.label "Speed" %>
       <%= f.text_field :speed %> <br/>
       <%= f.label "Turning" %>
