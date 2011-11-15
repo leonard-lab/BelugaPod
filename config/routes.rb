@@ -4,7 +4,9 @@ WhalesOnRails::Application.routes.draw do
   match '/joystick' => 'pages#joystick'
   match '/waypoint' => 'pages#waypoint'
 
-  resources :kinematics
+  resources :kinematics, :only => [:index, :new, :create, :show]
+  resources :positions, :only => [:index, :new, :create, :show]
+  
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

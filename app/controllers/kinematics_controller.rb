@@ -25,11 +25,6 @@ class KinematicsController < ApplicationController
 
     @sock = WhalesOnRails::Application::socket
 
-    # unless session[:sock] && !session[:sock].closed?
-    #   session[:sock] = TCPSocket.open('127.0.0.1', 1234)
-    # end
-
-    
   end
 
   
