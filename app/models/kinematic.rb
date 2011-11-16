@@ -38,7 +38,7 @@ class Kinematic < ActiveRecord::Base
     return nil unless mode == "kinematics"
     
     d = d[1..-1].collect{ |d| d.to_f }
-    return Kinematic.new(:id => id, :x => d[0], :y => d[1], :z => d[2])
+    return Kinematic.new(:id => id, :speed => d[0], :omega => d[1], :zdot => d[2])
   end
 
   def to_s

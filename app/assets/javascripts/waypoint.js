@@ -7,7 +7,7 @@ var g_SendPeriod = 100;  // milliseconds between updates
 $(document).ready(function(){
     $("#Zero").button();
 
-    $("#set_kinematics").button();
+    $("#set_waypoint").button();
     
     $("#Enable").button().toggle(function() {
         enableDraggables();
@@ -21,24 +21,18 @@ $(document).ready(function(){
         g_Enabled = false;
     });
     
-    $("#Zero").unbind("click").click(function(){
-        movePuckTo(0, 0);
-        moveVSliderTo(0);
-        $("form#new_kinematic").submit();        
-    });
-
     $("#XY").unbind("click").click(function(ev){
         if(g_Enabled)
         {
-            updateKinematicsXY(ev.pageX - 0.5*$("#XY").width() - $("#XY").position().left,
-                               ev.pageY - 0.5*$("#XY").height() - $("#XY").position().top);
+            updateWaypointXY(ev.pageX - 0.5*$("#XY").width() - $("#XY").position().left,
+                             ev.pageY - 0.5*$("#XY").height() - $("#XY").position().top);
         }
     });
 
     $("#Z").unbind("click").click(function(ev){
         if(g_Enabled)
         {
-            updateKinematicsZ(ev.pageY - $("#Z").position().top - 0.5*$("#Z").height());
+            updateWaypointZ(ev.pageY - $("#Z").position().top - 0.5*$("#Z").height());
         }
     });
 
@@ -57,10 +51,9 @@ function doSend()
 {
     if(g_NeedSend)
     {
-        $("form.new_kinematic").submit();
+        $("form.new_waypoint").submit();
         g_NeedSend = false;
     }
-
 }
 
 function enableDraggables()
@@ -68,7 +61,7 @@ function enableDraggables()
     $("#puck").draggable({
         containment: "#XY",
         drag: function(){
-            updateKinematicsXY(puckCenterX(), puckCenterY());
+            updateWaypointXY(puckCenterX(), puckCenterY());
         }
     });
 
@@ -76,7 +69,7 @@ function enableDraggables()
         axis: "y",
         containment: "#Z",
         drag: function(){
-            updateKinematicsZ(sliderCenterY());
+            updateWaypointZ(sliderCenterY());
         }
     });
 }
@@ -110,13 +103,13 @@ function debugOut(txt)
     $("#debug_out").text(txt);
 }
 
-function updateKinematicsXY(X, Y)
+function updateWaypointXY(X, Y)
 {
     movePuckTo(X, Y);
     g_NeedSend = true;
 }
 
-function updateKinematicsZ(Y)
+function updateWaypointZ(Y)
 {
     moveVSliderTo(Y);
     g_NeedSend = true;
@@ -128,6 +121,7 @@ function movePuckTo(x, y)
     var px = x - 0.5*w;
     var py = y - 0.5*w;
     var off = px + " " + py;
+
     $("#puck").position({
         my: "center center",
         at: "center center",
@@ -143,14 +137,14 @@ function movePuckTo(x, y)
     x = x/(0.5*parseFloat($("#XY").width()));
     y = y/(0.5*parseFloat($("#XY").height()));    
 
-    var s_max = parseFloat($("#kinematic_max_speed").val());
-    var o_max = parseFloat($("#kinematic_max_omega").val());
+    var x_max = 1;
+    var y_max = 1;
 
-    x = x*o_max;
-    y = y*s_max;
+    x = x*x_max;
+    y = y*y_max;
 
-    $("#kinematic_speed").val(y);
-    $("#kinematic_omega").val(x);
+    $("#waypoint_x").val(y);
+    $("#waypoint_y").val(x);
 
 }
 
@@ -167,16 +161,16 @@ function moveVSliderTo(y)
         offset: off
     });
 
-    y = -y;
+    y = 0.5*$("#Z").height()-y;
 
     $("#Zlabel").text(y);
 
-    y = y/(0.5*parseFloat($("#Z").height()));
+    y = y/(parseFloat($("#Z").height()));
     
-    var zdot_max = parseFloat($("#kinematic_max_zdot").val());
-    y = y*zdot_max;
+    var z_max = 2.286;
+    y = y*z_max;
 
-    $("#kinematic_zdot").val(y);
+    $("#waypoint_z").val(y);
 
 
 }

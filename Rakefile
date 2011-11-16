@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-WhalesOnRails::Application.load_tasks
+BelugaPod::Application.load_tasks

@@ -1,28 +1,12 @@
-class PositionsController < ApplicationController
-
-  def create
-    @position = Position.new(params[:position])
-
-    @position.save
-
-    respond_to do |format|
-      format.html do
-        if params[:short] && (params[:short] == "1" || params[:short] == "yes")
-          render :inline => @position.to_s
-        end
-        format.js { }
-      end
-    end
-
-  end
+class WaypointsController < ApplicationController
 
   def index
-    @positions = Position.all
+    @waypoints = Waypoint.all
 
     respond_to do |format|
       format.html do
         if params[:short] && (params[:short] == "1" || params[:short] == "yes")
-          render :inline => @positions.collect{ |p| p.to_s }.join(" ")
+          render :inline => @waypoints.collect{ |p| p.to_s }.join(" ")
         end
         
       end
@@ -33,14 +17,31 @@ class PositionsController < ApplicationController
   
   def show
     @id = params[:id]
-    @position = Position.find(@id)
+    @waypoint = Waypoint.find(@id)
     
     respond_to do |format|
       format.html do
         if params[:short] && (params[:short] == "1" || params[:short] == "yes")
-          render :inline => @position.to_s
+          render :inline => @waypoint.to_s
         end
       end
+    end
+
+  end
+    
+  def create
+
+    @waypoint = Waypoint.new(params[:waypoint])
+
+    @waypoint.save
+
+    respond_to do |format|
+      format.html do
+        if params[:short] && (params[:short] == "1" || params[:short] == "yes")
+          render :inline => @waypoint.to_s
+        end
+      end
+      format.js { }
     end
 
   end
