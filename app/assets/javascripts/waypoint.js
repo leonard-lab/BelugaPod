@@ -14,8 +14,6 @@ $(document).ready(function(){
         $(this).button('option', 'label', 'Disable');
         g_Enabled = true;
     }, function() {
-        movePuckTo(0, 0);
-        moveVSliderTo(0);
         disableDraggables();
         $(this).button('option', 'label', 'Enable');
         g_Enabled = false;
@@ -24,7 +22,9 @@ $(document).ready(function(){
     $("#XY").unbind("click").click(function(ev){
         if(g_Enabled)
         {
-            updateWaypointXY(ev.pageX - 0.5*$("#XY").width() - $("#XY").position().left,
+            var id = "#wp_" + $("#waypoint_id").val();
+            updateWaypointXY(id,
+                             ev.pageX - 0.5*$("#XY").width() - $("#XY").position().left,
                              ev.pageY - 0.5*$("#XY").height() - $("#XY").position().top);
         }
     });
@@ -32,12 +32,10 @@ $(document).ready(function(){
     $("#Z").unbind("click").click(function(ev){
         if(g_Enabled)
         {
-            updateWaypointZ(ev.pageY - $("#Z").position().top - 0.5*$("#Z").height());
+            var id = "#zp_" + $("#waypoint_id").val();
+            updateWaypointZ(id, ev.pageY - $("#Z").position().top - 0.5*$("#Z").height());
         }
-    });
-
-    movePuckTo(0, 0);
-    moveVSliderTo(0);
+    }); 
 
     if(g_HaveCounter == undefined)
     {
@@ -54,48 +52,61 @@ function doSend()
         $("form.new_waypoint").submit();
         g_NeedSend = false;
     }
+    if(g_Enabled)
+    {
+        $.ajax({
+            url: "/positions",
+            dataType: "script",
+        });
+    }
+}
+
+function setPosition(i, x, y, z)
+{
+    movePuckToWorldCoordinates("#cp_" + i, x, y);
+    moveVSliderToWorldCoordinates("#z_" + i, z);
 }
 
 function enableDraggables()
 {
-    $("#puck").draggable({
+/*    $(".waypoint orange").draggable({
         containment: "#XY",
         drag: function(){
             updateWaypointXY(puckCenterX(), puckCenterY());
         }
     });
 
-    $("#vslider").draggable({
+    $(".slider orange").draggable({
         axis: "y",
         containment: "#Z",
         drag: function(){
             updateWaypointZ(sliderCenterY());
         }
-    });
+    });*/
 }
 
 function disableDraggables()
 {
-    $("#puck").draggable('destroy');
-    $("#vslider").draggable('destroy');    
+    $(".waypoint orange").draggable('destroy');
+    $(".slider orange").draggable('destroy');    
 }
 
-function puckCenterX()
+function puckCenterX(id)
 {
-    return $("#puck").position().left - $("#XY").position().left
-        + 0.5*$("#puck").width() - 0.5*$("#XY").width();
+    return $(id).position().left - $("#XY").position().left
+        + 0.5*$(id).width() - 0.5*$("#XY").width();
 }
 
-function puckCenterY()
+function puckCenterY(id)
 {
-    return $("#puck").position().top - $("#XY").position().top
-        + 0.5*$("#puck").height() - 0.5*$("#XY").height();
+    return $(id).position().top - $("#XY").position().top
+        + 0.5*$(id).height() - 0.5*$("#XY").height();
 }
 
-function sliderCenterY()
+function sliderCenterY(id)
 {
-    return $("#vslider").position().top - $("#Z").position().top
-        + 0.5*$("#vslider").height() - 0.5*$("#Z").height();
+    return $(id).position().top - $("#Z").position().top
+        + 0.5*$(id).height() - 0.5*$("#Z").height();
 }
 
 function debugOut(txt)
@@ -103,26 +114,59 @@ function debugOut(txt)
     $("#debug_out").text(txt);
 }
 
-function updateWaypointXY(X, Y)
+function updateWaypointXY(id, X, Y)
 {
-    movePuckTo(X, Y);
+    var r_tank = 3.2;
+    var r_fig = 0.45*$("#XY").width();
+
+    var waypoint_x = X*(r_tank/r_fig);
+    var waypoint_y = Y*(r_tank/r_fig);    
+    $("#waypoint_x").val(waypoint_x);
+    $("#waypoint_y").val(waypoint_y);
+        
+    movePuckTo(id, X, Y);
     g_NeedSend = true;
 }
 
-function updateWaypointZ(Y)
+function updateWaypointZ(id, Y)
 {
-    moveVSliderTo(Y);
+    var d_tank = 2.286;
+    var d_fig = $("#Z").height();
+
+    var waypoint_z = (0.5*d_fig - Y)*(d_tank/d_fig);
+
+    $("#waypoint_z").val(waypoint_z);
+    
+    moveVSliderTo(id, Y);
     g_NeedSend = true;
 }
 
-function movePuckTo(x, y)
+function movePuckToWorldCoordinates(id, x_w, y_w)
+{
+    var r_tank = 3.2;
+    var r_fig = 0.45*$("#XY").width();
+    var x_fig = x_w*(r_fig/r_tank);
+    var y_fig = y_w*(r_fig/r_tank);
+    movePuckTo(id, x_fig, y_fig);
+}
+
+function moveVSliderToWorldCoordinates(id, z_w)
+{
+    var d_tank = 2.286;
+    var d_fig = $("#Z").height();
+    var y_fig =  0.5*d_fig - z_w*(d_fig/d_tank);
+
+    moveVSliderTo(id, y_fig);
+}
+
+function movePuckTo(id, x, y)
 {
     var w = 30;
-    var px = x - 0.5*w;
-    var py = y - 0.5*w;
+    var px = x;// - 0.5*w;
+    var py = y;// - 0.5*w;
     var off = px + " " + py;
 
-    $("#puck").position({
+    $(id).position({
         my: "center center",
         at: "center center",
         of: "#XY",
@@ -134,27 +178,15 @@ function movePuckTo(x, y)
     $("#Xlabel").text(x);
     $("#Ylabel").text(y);
     
-    x = x/(0.5*parseFloat($("#XY").width()));
-    y = y/(0.5*parseFloat($("#XY").height()));    
-
-    var x_max = 1;
-    var y_max = 1;
-
-    x = x*x_max;
-    y = y*y_max;
-
-    $("#waypoint_x").val(y);
-    $("#waypoint_y").val(x);
-
 }
 
-function moveVSliderTo(y)
+function moveVSliderTo(id, y)
 {
     var h = 10;
     var px = 1;
     var py = y - 0.5*h;
     var off = px + " " + py;
-    $("#vslider").position({
+    $(id).position({
         my: "left center",
         at: "left center",
         of: "#Z",
@@ -164,13 +196,5 @@ function moveVSliderTo(y)
     y = 0.5*$("#Z").height()-y;
 
     $("#Zlabel").text(y);
-
-    y = y/(parseFloat($("#Z").height()));
-    
-    var z_max = 2.286;
-    y = y*z_max;
-
-    $("#waypoint_z").val(y);
-
 
 }

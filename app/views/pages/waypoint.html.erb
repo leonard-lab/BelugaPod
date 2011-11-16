@@ -17,7 +17,14 @@
         <div id="XYContainer">
           Red: Waypoint, Green: Position
           <div id="XY">
-            <%= image_tag "puck.png", :id => "puck" %>
+            <div class="waypoint orange" id="wp_0">1</div>
+            <div class="waypoint orange" id="wp_1">2</div>
+            <div class="waypoint orange" id="wp_2">3</div>
+            <div class="waypoint orange" id="wp_3">4</div>
+            <div class="waypoint black" id="cp_0">1</div>
+            <div class="waypoint black" id="cp_1">2</div>
+            <div class="waypoint black" id="cp_2">3</div>
+            <div class="waypoint black" id="cp_3">4</div>            
           </div>
         </div>
       </td>
@@ -26,8 +33,15 @@
         <div id="ZContainer">
           Depth
           <div id="Z">
-            <%= image_tag "vslider.png", :id => "vslider" %>
-          </div>
+            <div class="vslider orange", id="zp_0"><span>1</span></div>
+            <div class="vslider orange", id="zp_1"><span>2</span></div>
+            <div class="vslider orange", id="zp_2"><span>3</span></div>
+            <div class="vslider orange", id="zp_3"><span>4</span></div>
+            <div class="vslider black", id="z_0"><span>1</span></div>
+            <div class="vslider black", id="z_1"><span>2</span></div>
+            <div class="vslider black", id="z_2"><span>3</span></div>
+            <div class="vslider black", id="z_3"><span>4</span></div>            
+         </div>
         </div>
       </td>
     </tr>
@@ -54,7 +68,7 @@
             <%= f.label "Robot" %>            
          </td>
           <td>
-            <%= f.select :id, [['Beluga 1', 0], ['Beluga 2', 1], ['Beluga 3', 2], ['Beluga 4', 4]] %><br/>            
+            <%= f.select :id, [['Beluga 1', 0], ['Beluga 2', 1], ['Beluga 3', 2], ['Beluga 4', 3]] %><br/>            
          </td>
         </tr>
        <tr>

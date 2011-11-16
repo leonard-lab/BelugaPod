@@ -24,9 +24,8 @@ class PositionsController < ApplicationController
         if params[:short] && (params[:short] == "1" || params[:short] == "yes")
           render :inline => @positions.collect{ |p| p.to_s }.join(" ")
         end
-        
       end
-
+      format.js
     end
 
   end

@@ -28,6 +28,53 @@ div#ZContainer {
   text-align: center;
   padding-left: 20px; }
 
+div.waypoint.orange
+{
+    background-image: url('orange_puck.png');
+    color: black;
+}
+
+div.waypoint.black
+{
+    background-image: url('puck.png');
+    color: orange;
+}
+
+div.vslider.orange
+{
+    background-image: url('orange_vslider.png');
+    color: black;
+}
+
+div.vslider.black
+{
+    background-image: url('vslider.png');
+    color: orange;
+}
+
+div.vslider
+{
+    height: 10px;
+    background-size: 30px 10px;
+    line-height: 10px;
+}
+
+.vslider span
+{
+    position: relative;
+    left: -25px;
+}
+
+div.waypoint
+{
+    width: 30px;
+    height: 30px;
+    background-size: 100% 100%;
+    color: white;
+    text-align: center;
+    line-height: 30px;
+}
+
 div#Z {
   margin-left: auto;
   margin-right: auto;
