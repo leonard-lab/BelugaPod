@@ -22,7 +22,7 @@ $(document).ready(function(){
     $("#XY").unbind("click").click(function(ev){
         if(g_Enabled)
         {
-            var id = "#wp_" + $("#waypoint_id").val();
+            var id = "#wp_" + selectedRobotId();
             updateWaypointXY(id,
                              ev.pageX - 0.5*$("#XY").width() - $("#XY").position().left,
                              ev.pageY - 0.5*$("#XY").height() - $("#XY").position().top);
@@ -32,10 +32,12 @@ $(document).ready(function(){
     $("#Z").unbind("click").click(function(ev){
         if(g_Enabled)
         {
-            var id = "#zp_" + $("#waypoint_id").val();
+            var id = "#zp_" + selectedRobotId();
             updateWaypointZ(id, ev.pageY - $("#Z").position().top - 0.5*$("#Z").height());
         }
-    }); 
+    });
+
+    $("#robot_select").buttonset();
 
     if(g_HaveCounter == undefined)
     {
@@ -44,6 +46,11 @@ $(document).ready(function(){
     }
     
  });
+
+function selectedRobotId()
+{
+    return $("#robot_select input:checked").val();
+}
 
 function doSend()
 {
@@ -174,7 +181,7 @@ function movePuckTo(id, x, y)
     });
     
     y = -y;
-    
+
     $("#Xlabel").text(x);
     $("#Ylabel").text(y);
     

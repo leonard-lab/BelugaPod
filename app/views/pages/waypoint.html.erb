@@ -15,7 +15,7 @@
     <tr>
       <td>
         <div id="XYContainer">
-          Red: Waypoint, Green: Position
+          Orange: Waypoint, Black: Position
           <div id="XY">
             <div class="waypoint orange" id="wp_0">1</div>
             <div class="waypoint orange" id="wp_1">2</div>
@@ -54,48 +54,35 @@
       <button id="Enable" title="Enable">Enable</button>
     </div>
 
-    <div id="xyz">
+    <div id="xyz" class="hidden">
       X:  <span id="Xlabel">0</span>, Y:  <span id="Ylabel">0</span>,  Z: <span id="Zlabel">0</span>
     </div>
 
     <%= form_for @waypoint, :remote => true do |f| %>
 
+      <div id="robot_select" class="center">
+        <%= f.radio_button :id, '0', :checked => true %>
+        <%= f.label :id_0, 'Beluga 1' %>
+        <%= f.radio_button :id, '1' %>
+        <%= f.label :id_1, 'Beluga 2' %>
+        <%= f.radio_button :id, '2' %>
+        <%= f.label :id_2, 'Beluga 3' %>
+        <%= f.radio_button :id, '3' %>
+        <%= f.label :id_3, 'Beluga 4' %>
+      </div>
 
-
-      <table>
-        <tr>
-          <td class="right_align">
-            <%= f.label "Robot" %>            
-         </td>
-          <td>
-            <%= f.select :id, [['Beluga 1', 0], ['Beluga 2', 1], ['Beluga 3', 2], ['Beluga 4', 3]] %><br/>            
-         </td>
-        </tr>
-       <tr>
-          <td class="right_align">
-            <%= f.label "X" %>
-          </td>
-          <td>
-            <%= f.text_field :x %>
-          </td>
-        </tr>
-        <tr>
-          <td class="right_align">
-            <%= f.label "Y" %>
-          </td>
-          <td>
-            <%= f.text_field :y %>
-          </td>
-        </tr>
-        <tr>
-          <td class="right_align">
-            <%= f.label "Z" %>
-          </td>
-          <td>
-            <%= f.text_field :z %>
-          </td>
-        </tr>
-      </table>
+      <div class="input_field">
+        <%= f.label "X" %>
+        <%= f.text_field :x %>
+      </div>
+      <div class="input_field">      
+        <%= f.label "Y" %>
+        <%= f.text_field :y %>
+      </div>
+      <div class="input_field">            
+        <%= f.label "Z" %>
+        <%= f.text_field :z %>
+      </div>
 
       <%= f.submit "Set Waypoint", :id => "set_waypoint" %>
     <% end %>

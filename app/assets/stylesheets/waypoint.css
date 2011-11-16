@@ -15,12 +15,32 @@ div#XYContainer {
   text-align: center; }
 
 div#XY {
+  background-color: lightblue;
   text-align: left;
   background-image: url("TankMed.png");
   background-size: 100% 100%;
   border: 1px solid black;
   width: 500px;
   height: 500px; }
+
+#robot_select input {
+  width: auto; }
+
+body {
+  font-family: Verdana; }
+
+.input_field, .input_field input {
+  margin-bottom: 10px;
+  height: 24px;
+  font-size: 18px; }
+
+div#robot_select {
+  margin-top: 10px;
+  margin-bottom: 10px; }
+
+.center {
+  margin-left: auto;
+  margin-right: auto; }
 
 div#ZContainer {
   text-align: center;
