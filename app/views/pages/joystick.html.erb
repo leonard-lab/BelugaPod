@@ -41,72 +41,49 @@
       <button id="Zero" title="Enable">Zero</button>
     </div>
 
-    <div id="xyz">
+    <div id="xyz" class="hidden">
       X:  <span id="Xlabel">0</span>, Y:  <span id="Ylabel">0</span>,  Z: <span id="Zlabel">0</span>
     </div>
 
     <%= form_for @kinematic, :remote => true do |f| %>
 
 
+      <div id="robot_select" class="center">
+        <%= f.radio_button :id, '0', :checked => true %>
+        <%= f.label :id_0, 'Beluga 1' %>
+        <%= f.radio_button :id, '1' %>
+        <%= f.label :id_1, 'Beluga 2' %>
+        <%= f.radio_button :id, '2' %>
+        <%= f.label :id_2, 'Beluga 3' %>
+        <%= f.radio_button :id, '3' %>
+        <%= f.label :id_3, 'Beluga 4' %>
+      </div>
+      
 
-      <table>
-        <tr>
-          <td class="right_align">
-            <%= f.label "Robot" %>            
-         </td>
-          <td>
-            <%= f.select :id, [['Beluga 1', 0], ['Beluga 2', 1], ['Beluga 3', 2], ['Beluga 4', 4]] %><br/>            
-         </td>
-        </tr>
-       <tr>
-          <td class="right_align">
-            <%= f.label "Speed" %>
-          </td>
-          <td>
-            <%= f.text_field :speed %>
-          </td>
-        </tr>
-        <tr>
-          <td class="right_align">
-            <%= f.label "Turning" %>
-          </td>
-          <td>
-            <%= f.text_field :omega %>
-          </td>
-        </tr>
-        <tr>
-          <td class="right_align">
-            <%= f.label "Vertical Speed" %>
-          </td>
-          <td>
-            <%= f.text_field :zdot %>
-          </td>
-        </tr>
-        <tr>
-          <td class="right_align">
-            <%= f.label "Max Speed" %>
-          </td>
-          <td>
-            <%= f.text_field :max_speed %>
-          </td>
-        </tr>
-        <tr>
-          <td class="right_align">
-            <%= f.label "Max Turning" %>
-          </td>
-          <td>
-            <%= f.text_field :max_omega %>
-          </td>
-        </tr>
-        <tr>
-          <td class="right_align">
-            <%= f.label "Max Vert. Speed" %>
-          </td>
-          <td>
-            <%= f.text_field :max_zdot %>
-          </td>
-        </tr>
-      </table>
+      <div class="input_field">
+        <%= f.label "Speed" %>
+        <%= f.text_field :speed %>
+      </div>
+      <div class="input_field">      
+        <%= f.label "Turning" %>
+        <%= f.text_field :omega %>
+      </div>
+      <div class="input_field">      
+       <%= f.label "Vertical Speed" %>
+        <%= f.text_field :zdot %>
+      </div>
+      <div class="input_field">      
+        <%= f.label "Max Speed" %>
+        <%= f.text_field :max_speed %>
+      </div>
+      <div class="input_field">      
+        <%= f.label "Max Turning" %>
+        <%= f.text_field :max_omega %>
+      </div>
+      <div class="input_field">
+        <%= f.label "Max Vert. Speed" %>
+        <%= f.text_field :max_zdot %>
+      </div>
 
       <%= f.submit "Set Kinematics", :id => "set_kinematics" %>
     <% end %>

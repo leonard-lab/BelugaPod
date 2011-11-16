@@ -1,2 +1,59 @@
 .hidden {
   display: none; }
+
+div#header {
+  text-align: center; }
+
+td {
+  vertical-align: bottom; }
+
+img {
+  position: absolute; }
+
+div#XYContainer {
+  text-align: center; }
+
+div#XY {
+  text-align: left;
+  background-color: lightblue;
+  border: 1px solid black; }
+
+#robot_select input {
+  width: auto; }
+
+body {
+  font-family: Verdana; }
+
+.input_field, .input_field input {
+  margin-bottom: 10px;
+  height: 24px;
+  font-size: 18px; }
+
+div#robot_select {
+  margin-top: 10px;
+  margin-bottom: 10px; }
+
+.center {
+  margin-left: auto;
+  margin-right: auto; }
+
+div#ZContainer {
+  text-align: center;
+  padding-left: 20px; }
+
+div#Z {
+  margin-left: auto;
+  margin-right: auto;
+  background-color: lightblue;
+  border: 1px solid black;
+  width: 20px; }
+
+div#bottom {
+  padding-top: 10px;
+  text-align: center; }
+
+div#buttons1, div#xyz, form {
+  padding: 5px; }
+
+input[type=text] {
+  width: 50%; }

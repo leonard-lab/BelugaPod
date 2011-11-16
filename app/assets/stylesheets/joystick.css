@@ -1,53 +1,15 @@
 div#container {
-  width: 375px; }
-
-div#header {
-  text-align: center; }
-
-td {
-  vertical-align: bottom; }
-
-img {
-  position: absolute; }
+  width: 500px; }
 
 div#XYContainer {
-  width: 300px;
-  text-align: center; }
+  width: 400px; }
 
 div#XY {
-  text-align: left;
-  background-color: lightblue;
-  border: 1px solid black;
-  width: 300px;
-  height: 300px; }
-
-div#ZContainer {
-  text-align: center;
-  padding-left: 20px; }
+  width: 400px;
+  height: 400px; }
 
 div#Z {
-  margin-left: auto;
-  margin-right: auto;
-  background-color: lightblue;
-  border: 1px solid black;
-  width: 20px;
-  height: 300px; }
-
-div#bottom {
-  padding-top: 10px;
-  text-align: center; }
-
-div#buttons1, div#xyz, form#new_kinematic {
-  padding: 5px; }
-
-table {
-  width: 100%; }
-
-td.right_align {
-  text-align: right; }
-
-select, input {
-  width: 50%; }
+  height: 400px; }
 
 #set_kinematics {
   margin-top: 5px; }

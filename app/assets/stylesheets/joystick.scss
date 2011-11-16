@@ -1,78 +1,25 @@
+$XWidth: 400px;
+
 div#container
 {
-    width: 375px;
+    width: $XWidth + 100px;
 }
 
-div#header
-{
-    text-align: center;
-}
-
-td
-{
-    vertical-align: bottom;
-}
-
-img
-{
-    position: absolute;
-}
 
 div#XYContainer
 {
-    width:300px;
-    text-align: center;
+    width: $XWidth;
 }
 
 div#XY
 {
-    text-align: left;
-    background-color: lightblue;
-    border: 1px solid black;
-    width: 300px;
-    height: 300px;
-}
-
-div#ZContainer
-{
-    text-align: center;
-    padding-left: 20px;
+    width: $XWidth;
+    height: $XWidth;
 }
 
 div#Z
 {
-    margin-left: auto;
-    margin-right: auto;
-    background-color: lightblue;
-    border: 1px solid black;
-    width: 20px;
-    height: 300px;
-}
-
-div#bottom
-{
-    padding-top: 10px;
-    text-align: center;
-}
-
-div#buttons1, div#xyz, form#new_kinematic
-{
-    padding: 5px;
-}
-
-table
-{
-    width: 100%;
-}
-
-td.right_align
-{
-    text-align: right;
-}
-
-select, input
-{
-    width: 50%;
+    height: $XWidth;
 }
 
 #set_kinematics

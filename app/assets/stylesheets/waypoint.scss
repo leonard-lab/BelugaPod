@@ -3,60 +3,16 @@ $XWidth: 500px;
 div#container {
   width: $XWidth + 100px; }
 
-div#header {
-  text-align: center; }
-
-td {
-  vertical-align: bottom; }
-
-img {
-  position: absolute; }
-
-div#XYContainer {
+div#XYContainer
+{
   width: $XWidth;
-  text-align: center; }
+}
 
 div#XY {
-    background-color: lightblue;
-    text-align: left;
     background-image: url('TankMed.png');
     background-size: 100% 100%;
-    border: 1px solid black;
     width: $XWidth;
     height: $XWidth; }
-
-#robot_select input
-{
-    width: auto;
-}
-
-body
-{
-    font-family: Verdana;    
-}
-
-.input_field, .input_field input
-{
-    margin-bottom: 10px;
-    height: 24px;
-    font-size: 18px;
-}
-
-div#robot_select
-{
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-.center
-{
-    margin-left: auto;
-    margin-right: auto;
-}
-
-div#ZContainer {
-  text-align: center;
-  padding-left: 20px; }
 
 div.waypoint.orange
 {
@@ -105,29 +61,10 @@ div.waypoint
     line-height: 30px;
 }
 
-div#Z {
-  margin-left: auto;
-  margin-right: auto;
-  background-color: lightblue;
-  border: 1px solid black;
-  width: 20px;
-  height: $XWidth; }
-
-div#bottom {
-  padding-top: 10px;
-  text-align: center; }
-
-div#buttons1, div#xyz, form#new_waypoint {
-  padding: 5px; }
-
-table {
-  width: 100%; }
-
-td.right_align {
-  text-align: right; }
-
-select, input {
-  width: 50%; }
+div#Z
+{
+  height: $XWidth;
+}
 
 #set_waypoint {
   margin-top: 5px; }

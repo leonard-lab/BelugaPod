@@ -42,6 +42,8 @@ $(document).ready(function(){
         }
     });
 
+    $("#robot_select").buttonset();
+
     movePuckTo(0, 0);
     moveVSliderTo(0);
 
