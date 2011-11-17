@@ -18,6 +18,7 @@ div.waypoint.orange
 {
     background-image: url('orange_puck.png');
     color: black;
+    z-index: 10;
 }
 
 div.waypoint.black
@@ -30,6 +31,7 @@ div.vslider.orange
 {
     background-image: url('orange_vslider.png');
     color: black;
+    z-index: 10;
 }
 
 div.vslider.black

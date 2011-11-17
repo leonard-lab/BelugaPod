@@ -8,8 +8,8 @@ class WaypointsController < ApplicationController
         if params[:short] && (params[:short] == "1" || params[:short] == "yes")
           render :inline => @waypoints.collect{ |p| p.to_s }.join(" ")
         end
-        
       end
+      format.js { }
 
     end
 
