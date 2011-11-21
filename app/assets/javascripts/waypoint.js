@@ -3,7 +3,7 @@ var g_Enabled = false;
 var g_HaveCounter;
 var g_NeedSend = false;
 var g_LockWaypointId = -1;
-var g_SendPeriod = 100;  // milliseconds between updates
+var g_SendPeriod = 500;  // milliseconds between updates
 
 var g_RTank = 3.2;
 
