@@ -1,3 +1,15 @@
+GIT
+  remote: git://github.com/dantswain/BelugaIPC.git
+  revision: 92a736a4cf740367c676891caf42a9ed2bb2cc13
+  specs:
+    beluga_ipc (0.1.0)
+
+GIT
+  remote: git://github.com/dantswain/rhubarb.git
+  revision: 64f2513f4e0e634f07fed81d95c83e247f3999ff
+  specs:
+    rhubarb (0.1.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -121,11 +133,13 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  beluga_ipc!
   coffee-rails (~> 3.1.1)
   jquery-rails
   json
   rails (= 3.1.1)
   rake (= 0.8.7)
+  rhubarb!
   rspec-rails (~> 2.4)
   sass-rails (~> 3.1.4)
   sqlite3
