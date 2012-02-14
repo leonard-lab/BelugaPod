@@ -19,7 +19,15 @@ class BelugaSocket < ActiveRecord::Base
   end
 
   def self.sock
-    BelugaPod::Application::socket
+    unless @sock
+      @sock = TCPsocket.open('127.0.0.1', 1234)
+      @sock.gets
+    end
+    @sock
   end
-    
+
+  def self.close
+    self.sock.close
+  end
+
 end
