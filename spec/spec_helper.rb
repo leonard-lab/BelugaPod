@@ -16,6 +16,13 @@ class TestServerRunner
     @server.start
   end
 
+  def self.terminate_externally
+    s = TCPsocket.new('127.0.0.1', 1234)
+    s.gets
+    s.puts "S"
+    s.close
+  end
+
   def self.terminate
     BelugaSocket.exchange("S")
     @server.join
