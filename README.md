@@ -1,0 +1,4 @@
+Beluga POD
+==========
+
+Beluga POD is a Rails-based web interface for the [Beluga project](http://github.com/leonard-lab/Beluga) developed at the [Dynamical Control Systems Laboratory](http://dcsl.princeton.edu/robotics) at Princeton University.  It uses TCP sockets to connect to a [Beluga IPC server](http://github.com/leonard-lab/BelugaIPC) (built with [rhubarb](http://github.com/dantswain/rhubarb)).  Both joystick and waypoint (point-and-move) style interfaces are provided that use AJAX to continuously update the user's view with the latest information from the tracking software while sending commands to the robots.
