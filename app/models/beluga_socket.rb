@@ -1,23 +1,52 @@
-class BelugaSocket < ActiveRecord::Base
-  set_table_name :empty_table
+require 'io/wait'
+
+class BelugaSocket
+  #set_table_name :empty_table
 
   def self.exchange input
-    sock.puts input
-    response = sock.gets
-    raise "Beluga socket error: No response from the server" if response.nil?
-    response
+    begin
+      sock.puts input
+      response = sock.gets
+      raise "Beluga socket error: No response from the server" if response.nil?
+      raise "Beluga socket error: Error response from server" if response =~ /server error/i
+      response.strip
+    rescue Errno::ECONNRESET
+      if reconnect
+        retry
+      else
+        raise
+      end
+    end
   end
 
-  def self.sock
-    unless @sock
+  def self.reconnect
+    sock(true)
+    okay?
+  end
+
+  def self.sock force_connect = false
+    if force_connect || @sock.nil?
+      @sock.close unless @sock.nil?
       @sock = TCPsocket.open('127.0.0.1', 1234)
-      @sock.gets
+      @sock.wait(100)
+      if @sock.ready?
+        @sock.gets
+      end
     end
     @sock
   end
 
+  def self.okay?
+    begin
+      !!(exchange("ping") =~ /pong/i)
+    rescue
+      false
+    end
+  end
+
   def self.close
-    self.sock.close
+    @sock.close unless @sock.nil?
+    @sock = nil
   end
 
 end

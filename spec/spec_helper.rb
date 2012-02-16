@@ -4,6 +4,8 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
 
+require 'io/wait'
+
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
@@ -12,15 +14,14 @@ class TestServerRunner
   def self.launch
     @server = BelugaIPC::Server.new(1234, '127.0.0.1')
 
-    @server.audit = true
+    # uncomment to get some debug info from the server
+    # @server.audit = true
     @server.start
   end
 
   def self.terminate_externally
-    s = TCPsocket.new('127.0.0.1', 1234)
-    s.gets
-    s.puts "S"
-    s.close
+    @server.stop
+    @server.join
   end
 
   def self.terminate
