@@ -17,9 +17,9 @@ class Waypoint < ActiveRecord::Base
 
     return [] unless mode == "waypoint"
     
-    d = d[1..-1].collect{ |d| d.to_f }
+    d = d[1..-1].collect(&:to_f)
     out = []
-    i = -1;
+    i = -1
     d.each_slice(3){ |s| out << Waypoint.new(:id => (i += 1),
                                              :x => s[0],
                                              :y => s[1],
@@ -37,7 +37,7 @@ class Waypoint < ActiveRecord::Base
 
     return nil unless mode == "waypoint"
     
-    d = d[1..-1].collect{ |d| d.to_f }
+    d = d[1..-1].collect(&:to_f)
     return Waypoint.new(:id => id, :x => d[0], :y => d[1], :z => d[2])
   end
 
@@ -46,7 +46,7 @@ class Waypoint < ActiveRecord::Base
   end
 
   def save
-    if id
+    if id && (0..3).include?(id)
       BelugaSocket.exchange "set control waypoint #{id} #{x} #{y} #{z}"
       true
     else
