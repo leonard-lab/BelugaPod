@@ -30,6 +30,46 @@ class TestServerRunner
   end
 end
 
+module RandomNumber
+  def self.float args=1.0
+    min = 0.0
+    if args.is_a? Hash
+      if args[:plus_minus]
+        min = -1.0*args[:plus_minus].to_f
+        max = 1.0*args[:plus_minus].to_f
+      else
+        min = (args[:min] || 0.0).to_f
+        max = (args[:max] || 1.0).to_f
+      end
+    else
+      max = args.to_f
+    end
+
+    min + (max - min)*rand()
+  end
+end
+
+# tolerance for comparing floats
+TOL = 0.0001
+
+RSpec::Matchers.define :be_a_match_for do |expected|
+  match do |actual|
+    check_match_for(actual, expected)
+  end
+
+  def check_match_for(actual, expected)
+    result = true
+    expected.each_pair do |ex_k, ex_v|
+     if ex_v.is_a? Float
+        result &= ((actual.send(ex_k) - ex_v).abs < TOL)
+      else
+        result &= (actual.send(ex_k) == ex_v)
+      end
+    end
+    result
+  end
+end
+
 RSpec.configure do |config|
   # == Mock Framework
   #

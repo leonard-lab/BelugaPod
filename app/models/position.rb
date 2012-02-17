@@ -11,9 +11,9 @@ class Position < ActiveRecord::Base
 
   def self.all
     r = BelugaSocket.exchange "get position *"
-    d = r.split.collect{ |d| d.to_f }
+    d = r.split.collect(&:to_f)
     out = []
-    i = -1;
+    i = -1
     d.each_slice(3){ |s| out << Position.new(:id => (i += 1), :x => s[0], :y => s[1], :z => s[2])}
     out
   end
@@ -23,7 +23,7 @@ class Position < ActiveRecord::Base
     return nil unless (0..3).include?(id)
     
     r = BelugaSocket.exchange "get position #{id}"
-    d = r.split.collect{ |d| d.to_f }
+    d = r.split.collect(&:to_f)
     return Position.new(:id => id, :x => d[0], :y => d[1], :z => d[2])
   end
 
@@ -32,7 +32,7 @@ class Position < ActiveRecord::Base
   end
 
   def save
-    if id
+    if id && (0..3).include?(id)
       BelugaSocket.exchange "set position #{id} #{x} #{y} #{z}"
       true
     else
