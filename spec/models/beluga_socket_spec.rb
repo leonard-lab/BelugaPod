@@ -36,7 +36,7 @@ describe BelugaSocket do
   describe "When the IPC server is NOT running" do
     it "should raise an error" do
       lambda do
-        puts BelugaSocket.exchange("ping")
+        BelugaSocket.exchange("ping")
       end.should raise_error
     end
 
@@ -61,6 +61,12 @@ describe BelugaSocket do
 
     it "should return false for okay?" do
       BelugaSocket.should_not be_okay
+    end
+
+    it "should be able to reconnect if the server comes back online" do
+      TestServerRunner.launch
+      BelugaSocket.exchange("ping").should match "PONG"
+      TestServerRunner.terminate
     end
 
     after(:each) do
