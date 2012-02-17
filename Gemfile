@@ -22,6 +22,8 @@ gem 'jquery-rails'
 
 group :test, :development do
   gem 'rspec-rails', '~> 2.4'
+  gem 'nokogiri'
+  gem 'webrat'
 end
 
 gem 'rhubarb', :git => 'git://github.com/dantswain/rhubarb.git'
