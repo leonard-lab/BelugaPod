@@ -17,9 +17,9 @@ class Kinematic < ActiveRecord::Base
 
     return [] unless mode == "kinematics"
     
-    d = d[1..-1].collect{ |d| d.to_f }
+    d = d[1..-1].collect(&:to_f)
     out = []
-    i = -1;
+    i = -1
     d.each_slice(3){ |s| out << Kinematic.new(:id => (i += 1),
                                               :speed => s[0],
                                               :omega => s[1],
@@ -37,7 +37,7 @@ class Kinematic < ActiveRecord::Base
 
     return nil unless mode == "kinematics"
     
-    d = d[1..-1].collect{ |d| d.to_f }
+    d = d[1..-1].collect(&:to_f)
     return Kinematic.new(:id => id, :speed => d[0], :omega => d[1], :zdot => d[2])
   end
 
@@ -46,7 +46,7 @@ class Kinematic < ActiveRecord::Base
   end
 
   def save
-    if id
+    if id && (0..3).include?(id)
       BelugaSocket.exchange "set control kinematics #{id} #{speed} #{omega} #{zdot}"
       true
     else
