@@ -1,6 +1,9 @@
 Welcome to the Beluga web interface: Whales on Rails.
 
+<%= render :partial => 'ipc_status' %>
+
 <ul>
   <li><%= link_to "Joystick control", joystick_path %></li>
   <li><%= link_to "Waypoint control", waypoint_path %></li>
+  <li><%= link_to "IPC server info", ipc_path %></li>
 </ul>

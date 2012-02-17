@@ -1,0 +1,24 @@
+<h1>Beluga IPC Status</h1>
+
+<div id="server_status" <%= 'class=warning' unless @ipc_up %>>
+  <% if @ipc_up %>
+    BelugaIPC Server is up and running on port 1234.
+  <% else %>
+    BelugaIPC Server is not running.
+  <% end %>
+</div>
+
+<h2>Beluga IPC Info</h2>
+<div id="info">
+  <p>You can control the IPC server on the tracking computer with code in the <%=  link_to "BelugaIPC", "https://github.com/leanard-lab/BelugaIPC" %> repository.  Clone that project into a directory on the tracking computer, open a terminal (use GitBash on Windows), navigate to the BelugaIPC directory, and run</p>
+  
+  <div class="code">bin/beluga_daemon start</div>
+  
+  <p>You can stop it by running</p> 
+    
+  <div class="code">bin/beluga_daemon stop</div>
+  
+  <p>If you are running POD for development, you can start/stop the IPC server from the BelugaPOD directory by running</p>
+  
+  <div class="code">bundle exec beluga_daemon start/stop</div>
+</div>

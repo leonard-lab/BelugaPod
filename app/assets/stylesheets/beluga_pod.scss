@@ -103,3 +103,24 @@ input[type=text]
     -o-user-select: none;
     user-select: none;
 }
+
+div.warning
+{
+  margin: 5px;
+  padding: 5px;
+  background-color: lightyellow;
+  width: 600px;
+}
+
+div.code
+{
+  background-color: lightgray;
+  border: 1 px dashed black;
+  font-family: 'Lucida Console', 'Bitstream Vera Sans Mono', 'Courier New', Monaco, Courier, monospace;
+  white-space: pre;
+  margin: 1em 0;
+  padding: 0.5em 0 0.3em 0.5em;
+  font-size: 80%;
+  overflow: auto;
+  width: 600px;
+}

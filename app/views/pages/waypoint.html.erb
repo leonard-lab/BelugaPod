@@ -11,6 +11,8 @@
     <h2>Beluga Waypoint Control</h2>
   </div>
 
+  <%= render :partial => 'ipc_status' %>
+
   <table>
     <tr>
       <td>
@@ -33,14 +35,14 @@
         <div id="ZContainer">
           Depth
           <div id="Z">
-            <div class="vslider orange unselectable", id="zp_0"><span>1</span></div>
-            <div class="vslider orange unselectable", id="zp_1"><span>2</span></div>
-            <div class="vslider orange unselectable", id="zp_2"><span>3</span></div>
-            <div class="vslider orange unselectable", id="zp_3"><span>4</span></div>
-            <div class="vslider black unselectable", id="z_0"><span>1</span></div>
-            <div class="vslider black unselectable", id="z_1"><span>2</span></div>
-            <div class="vslider black unselectable", id="z_2"><span>3</span></div>
-            <div class="vslider black unselectable", id="z_3"><span>4</span></div>            
+            <div class="vslider orange unselectable" id="zp_0"><span>1</span></div>
+            <div class="vslider orange unselectable" id="zp_1"><span>2</span></div>
+            <div class="vslider orange unselectable" id="zp_2"><span>3</span></div>
+            <div class="vslider orange unselectable" id="zp_3"><span>4</span></div>
+            <div class="vslider black unselectable" id="z_0"><span>1</span></div>
+            <div class="vslider black unselectable" id="z_1"><span>2</span></div>
+            <div class="vslider black unselectable" id="z_2"><span>3</span></div>
+            <div class="vslider black unselectable" id="z_3"><span>4</span></div>
          </div>
         </div>
       </td>
@@ -88,7 +90,7 @@
     <% end %>
     
     <br/>
-    <span id="debug_out"></span>
+    <span id="debug_out"><%= @sf %></span>
   </div>
 
 </div>
