@@ -46,6 +46,10 @@ class Waypoint < ActiveRecord::Base
   end
 
   def save
+    self.id = id.to_i
+    self.x = x.to_f
+    self.y = y.to_f
+    self.z = z.to_f
     if id && (0..3).include?(id)
       BelugaSocket.exchange "set control waypoint #{id} #{x} #{y} #{z}"
       true

@@ -46,6 +46,10 @@ class Kinematic < ActiveRecord::Base
   end
 
   def save
+    self.id = id.to_i
+    self.speed = speed.to_f
+    self.omega = omega.to_f
+    self.zdot = zdot.to_f
     if id && (0..3).include?(id)
       BelugaSocket.exchange "set control kinematics #{id} #{speed} #{omega} #{zdot}"
       true

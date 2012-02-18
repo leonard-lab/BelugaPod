@@ -56,6 +56,12 @@ describe Position do
       Position.find(4).should be_nil
     end
 
+    it "should allow to set the parameters via strings" do
+      attr_as_str = @attr[0].inject(Hash.new){|h, (k,v)| h[k.to_s] = v.to_s; h}
+      Position.new(attr_as_str).save.should == true
+      Position.find(@attr[0][:id]).should be_a_match_for(@attr[0])
+    end
+
     after(:each) do
       TestServerRunner.terminate
       BelugaSocket.close

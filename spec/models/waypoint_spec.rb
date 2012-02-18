@@ -70,6 +70,12 @@ describe Waypoint do
       end
     end
 
+    it "should allow to set the parameters via strings" do
+      attr_as_str = @attr[0].inject(Hash.new){|h, (k,v)| h[k.to_s] = v.to_s; h}
+      Waypoint.new(attr_as_str).save.should == true
+      Waypoint.find(@attr[0][:id]).should be_a_match_for(@attr[0])
+    end
+
     after(:each) do
       TestServerRunner.terminate
       BelugaSocket.close

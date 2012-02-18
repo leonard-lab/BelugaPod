@@ -68,6 +68,13 @@ describe Kinematic do
       it "should return an empty array for all" do
         Kinematic.all.should be_empty
       end
+
+      it "should allow to set the parameters via strings" do
+        attr_as_str = @attr[0].inject(Hash.new){|h, (k,v)| h[k.to_s] = v.to_s; h}
+        Kinematic.new(attr_as_str).save.should == true
+        Kinematic.find(@attr[0][:id]).should be_a_match_for(@attr[0])
+      end
+
     end
 
     after(:each) do
