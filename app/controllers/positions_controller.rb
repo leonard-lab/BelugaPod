@@ -3,15 +3,13 @@ class PositionsController < ApplicationController
   def create
     @position = Position.new(params[:position])
 
-    @position.save
+    unless @position.save
+      raise "Unable to save position: #{@position.errors.full_messages {|msg| p msg}}"
+    end
 
     respond_to do |format|
-      format.html do
-        if params[:short] && (params[:short] == "1" || params[:short] == "yes")
-          render :inline => @position.to_s
-        end
-        format.js { }
-      end
+      format.html { render :inline => @position.to_s }
+      format.js { }
     end
 
   end
