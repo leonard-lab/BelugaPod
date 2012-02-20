@@ -19,7 +19,7 @@ class PositionsController < ApplicationController
 
     respond_to do |format|
       format.html do
-        if params[:short] && (params[:short] == "1" || params[:short] == "yes")
+        if short_response?
           render :inline => @positions.collect{ |p| p.to_s }.join(" ")
         end
       end
@@ -34,7 +34,7 @@ class PositionsController < ApplicationController
     
     respond_to do |format|
       format.html do
-        if params[:short] && (params[:short] == "1" || params[:short] == "yes")
+        if short_response?
           render :inline => @position.to_s
         end
       end

@@ -5,7 +5,7 @@ class WaypointsController < ApplicationController
 
     respond_to do |format|
       format.html do
-        if params[:short] && (params[:short] == "1" || params[:short] == "yes")
+        if short_response?
           render :inline => @waypoints.collect{ |p| p.to_s }.join(" ")
         end
       end
@@ -14,14 +14,14 @@ class WaypointsController < ApplicationController
     end
 
   end
-  
+
   def show
     @id = params[:id]
     @waypoint = Waypoint.find(@id)
     
     respond_to do |format|
       format.html do
-        if params[:short] && (params[:short] == "1" || params[:short] == "yes")
+        if short_response?
           render :inline => @waypoint.to_s
         end
       end
@@ -37,7 +37,7 @@ class WaypointsController < ApplicationController
 
     respond_to do |format|
       format.html do
-        if params[:short] && (params[:short] == "1" || params[:short] == "yes")
+        if short_response?
           render :inline => @waypoint.to_s
         end
       end
