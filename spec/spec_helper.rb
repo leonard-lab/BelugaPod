@@ -4,7 +4,21 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
 
+require 'capybara/rails'
+require 'capybara/rspec'
+
 require 'io/wait'
+
+# Sets it up so that capybara will dump any webrick logs to log/capybara_test.log
+#   This is good bc any webrick failures will show up in the logs.
+Capybara.server do |app, port|
+  require 'rack/handler/webrick'
+  log_path = Rails.root.join("log/capybara_test.log").to_s
+  Rack::Handler::WEBrick.run(app,
+                             :Port => port,
+                             :AccessLog => [],
+                             :Logger => WEBrick::Log::new(log_path))
+end
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.

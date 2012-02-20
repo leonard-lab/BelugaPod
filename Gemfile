@@ -24,6 +24,12 @@ group :test, :development do
   gem 'rspec-rails', '~> 2.4'
   gem 'nokogiri'
   gem 'webrat'
+
+  # capybara for javascript testing
+  gem 'capybara'
+
+  # launchy allows us to do save_and_launch_page, which is very helpful during testing
+  gem 'launchy'
 end
 
 gem 'rhubarb', :git => 'git://github.com/dantswain/rhubarb.git'
