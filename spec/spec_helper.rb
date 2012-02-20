@@ -12,6 +12,7 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
 class TestServerRunner
   def self.launch
+    BelugaIPC::Server.reset_data
     @server = BelugaIPC::Server.new(1234, '127.0.0.1')
 
     # uncomment to get some debug info from the server

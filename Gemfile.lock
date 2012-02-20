@@ -6,10 +6,9 @@ GIT
 
 GIT
   remote: git://github.com/leonard-lab/BelugaIPC.git
-  revision: d233a79e22932592712f9fd97bd82ed8389ccdc7
+  revision: b18d260595f7b8786fb013d48a0666e2e22ca471
   specs:
     beluga_ipc (0.1.0)
-      daemons
 
 GEM
   remote: http://rubygems.org/
@@ -51,7 +50,6 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.2.0)
-    daemons (1.1.8)
     diff-lcs (1.1.3)
     erubis (2.7.0)
     execjs (1.3.0)
@@ -67,7 +65,7 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.17.2)
-    multi_json (1.0.4)
+    multi_json (1.1.0)
     nokogiri (1.5.0)
     polyglot (0.3.3)
     rack (1.3.6)
