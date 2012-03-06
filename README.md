@@ -12,9 +12,9 @@ As an example, suppose that we want to add a new experimental interface that can
 
      Add the following line below the `match '/waypoint' => 'pages#waypoint` line in `config/routes.rb`:
 
-```ruby
-match '/hitl' => 'pages#hitl'
-```
+     ``` ruby
+     match '/hitl' => 'pages#hitl'
+     ```
 
      This tells Rails that whenever someone visits `<thehost>/hitl`, we want the application to execute the code found in the `hitl` action (aka function/method) in the `PagesController` controller.
 
@@ -24,19 +24,19 @@ match '/hitl' => 'pages#hitl'
 
      Open up `app/controllers/pages_controller.rb` and add a `hitl` method to the `PagesController` class:
      
-```ruby
-class PagesController < ApplicationController
-  # ...
-  # existing code...
-
-  # the new 'hitl' action
-  def hitl
-    # whatever code needs to go here
-    # for example, if we need a waypoint:
-    @waypoint = Waypoint.new(:id => 0, :x => 0, :y => 0, :z => 0)
-  end
-end
-```
+     ``` ruby
+     class PagesController < ApplicationController
+       # ...
+       # existing code...
+      
+       # the new 'hitl' action
+       def hitl
+         # whatever code needs to go here
+         # for example, if we need a waypoint:
+         @waypoint = Waypoint.new(:id => 0, :x => 0, :y => 0, :z => 0)
+       end
+     end
+     ```
 
      Take a look at the other actions to see what kind of code might need to go into this method.  The basic idea is to set up any variables that you need in your view.  Any instance variable (the ones with the `@` in front) will be available in the view.  It's entirely possible that you don't need any code at all here.
 
@@ -44,15 +44,15 @@ end
 
      Create a file `app/views/pages/hitl.html.erb`.  Probably the simplest way to do this is to copy an existing view and rename the file.  If you want to use custom css and/or javascript, set up the appropriate `content_for` blocks:
      
-```erb
-<%= content_for :page_css do %>
-  <%= stylesheet_link_tag "hitl" %>
-<% end %>
-
-<%= content_for :page_js do %>
-  <%= javascript_include_tag "hitl" %>
-<% end %>
-```
+     ``` erb
+     <%= content_for :page_css do %>
+       <%= stylesheet_link_tag "hitl" %>
+     <% end %>
+      
+     <%= content_for :page_js do %>
+       <%= javascript_include_tag "hitl" %>
+     <% end %>
+     ```
 
      This tells Rails to insert a css link to the file at `app/assets/stylesheets/hitl.css` and the javascript file at `app/assets/javascripts/hitl.js`.  Note that this is optional and you can include multiple files here.  For example, if you want to include the `waypoint.js` file as well, just add a duplicate `javascript_include_tag` line and replace `hitl` with `waypoint`.
 
