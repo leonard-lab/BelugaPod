@@ -92,7 +92,7 @@ RSpec.configure do |config|
   config.include Rack::Test::Methods
 
   def app
-    Rails::Application
+    BelugaPod::Application
   end
   
   # == Mock Framework

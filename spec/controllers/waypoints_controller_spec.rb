@@ -13,18 +13,18 @@ describe WaypointsController do
     end
 
     it "should set the waypoint" do
-      post :create, :waypoint => @attr
+      post '/waypoints', :waypoint => @attr
       Waypoint.find(0).should be_a_match_for(@attr)
     end
 
     it "should respond with the waypoint if the short param is set" do
-      post :create, :waypoint => @attr, :short => "1"
-      response.should contain [@attr[:x], @attr[:y], @attr[:z]].join(" ")
+      post '/waypoints', :waypoint => @attr, :short => "1"
+      last_response.body.should include [@attr[:x], @attr[:y], @attr[:z]].join(" ")
     end
 
     it "should respond to a javascript request" do
-      post :create, :waypoint => @attr, :format => 'js'
-      response.should contain "updateWaypoint(#{[@attr[:id], @attr[:x], @attr[:y], @attr[:z]].join(",")})"
+      post '/waypoints', :waypoint => @attr, :format => 'js'
+      last_response.body.should include "updateWaypoint(#{[@attr[:id], @attr[:x], @attr[:y], @attr[:z]].join(",")})"
     end
   end
 
