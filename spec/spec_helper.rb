@@ -85,7 +85,16 @@ RSpec::Matchers.define :be_a_match_for do |expected|
   end
 end
 
+
+
 RSpec.configure do |config|
+  # we use rack::test for controller tests
+  config.include Rack::Test::Methods
+
+  def app
+    Rails::Application
+  end
+  
   # == Mock Framework
   #
   # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:

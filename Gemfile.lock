@@ -1,12 +1,12 @@
 GIT
   remote: git://github.com/dantswain/rhubarb.git
-  revision: edc5274c1112b5c7c17e213de05e5e96da4f6dd3
+  revision: a5c29be1a37bcc3e420c5fe68428662761807c7a
   specs:
     rhubarb (0.1.0)
 
 GIT
   remote: git://github.com/leonard-lab/BelugaIPC.git
-  revision: b18d260595f7b8786fb013d48a0666e2e22ca471
+  revision: 27df11ef5c5c564115ffbf6fbc94de16e276e573
   specs:
     beluga_ipc (0.1.0)
 
@@ -148,10 +148,6 @@ GEM
     uglifier (1.2.3)
       execjs (>= 0.3.0)
       multi_json (>= 1.0.2)
-    webrat (0.7.3)
-      nokogiri (>= 1.2.0)
-      rack (>= 1.0)
-      rack-test (>= 0.5.3)
     xpath (0.1.4)
       nokogiri (~> 1.3)
 
@@ -173,4 +169,3 @@ DEPENDENCIES
   sass-rails (~> 3.1.4)
   sqlite3
   uglifier (>= 1.0.3)
-  webrat

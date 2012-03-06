@@ -23,7 +23,6 @@ gem 'jquery-rails'
 group :test, :development do
   gem 'rspec-rails', '~> 2.4'
   gem 'nokogiri'
-  gem 'webrat'
 
   # capybara for javascript testing
   gem 'capybara'
