@@ -184,9 +184,15 @@ function selectRobot(id_num)
 
 function updateWaypointForm(id_num)
 {
-    $("#waypoint_x").val(fig2WorldXorY(puckCenterX("#wp_" + id_num)));
-    $("#waypoint_y").val(fig2WorldXorY(puckCenterY("#wp_" + id_num)));
-    $("#waypoint_z").val(fig2WorldZ(sliderCenterY("#zp_" + id_num)));            
+    setFormValue("#waypoint_x", fig2WorldXorY(puckCenterX("#wp_" + id_num)));
+    setFormValue("#waypoint_y", fig2WorldXorY(puckCenterY("#wp_" + id_num)));
+    setFormValue("#waypoint_z", fig2WorldZ(sliderCenterY("#zp_" + id_num)) );
+}
+
+/* function to set form value with rounding to two decimal places */
+function setFormValue(id, value)
+{
+    $(id).val(Math.round(100*value)/100);
 }
 
 function puckCenterX(id)
@@ -236,8 +242,8 @@ function updateWaypointXY(id, X, Y)
         return;
     }
 
-    $("#waypoint_x").val(waypoint_x);
-    $("#waypoint_y").val(waypoint_y);
+    setFormValue("#waypoint_x", waypoint_x);
+    setFormValue("#waypoint_y", waypoint_y);    
         
     movePuckTo(id, X, Y);
     g_NeedSend = true;
@@ -247,7 +253,7 @@ function updateWaypointZ(id, Y)
 {
     var waypoint_z = fig2WorldZ(Y);
 
-    $("#waypoint_z").val(waypoint_z);
+    setFormValue("#waypoint_z", waypoint_z);
     
     moveVSliderTo(id, Y);
     g_NeedSend = true;

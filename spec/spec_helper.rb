@@ -43,6 +43,10 @@ class TestServerRunner
     BelugaSocket.exchange("S")
     @server.join
   end
+
+  def self.reset_data
+    BelugaIPC::Server.reset_data
+  end
 end
 
 module RandomNumber
