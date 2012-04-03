@@ -31,8 +31,8 @@ group :test, :development do
   gem 'launchy'
 end
 
-gem 'rhubarb', :git => 'git://github.com/dantswain/rhubarb.git'
-gem 'beluga_ipc', :git => 'git://github.com/leonard-lab/BelugaIPC.git'
+gem 'rhubarb', "0.1.1", :git => 'git://github.com/dantswain/rhubarb.git'
+gem 'beluga_ipc', "0.1.1", :git => 'git://github.com/leonard-lab/BelugaIPC.git'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
