@@ -7,59 +7,90 @@ var g_SendPeriod = 500;  // milliseconds between updates
 
 var g_RTank = 3.2;
 
+/* this gets called when the page is loaded */
 $(document).ready(function(){
 
+    /* update the waypoints and positions from the server
+     *  - this will cause the pucks to move to the right positions */
     requestWaypoints();
     requestPositions();
-    
-    $("#Zero").button();
 
+    /* make these jquery-ui styled buttons */
+    $("#Zero").button();
     $("#set_waypoint").button();
-    
+
+    /* make the enable button, specify that it is a toggle button */
     $("#Enable").button().toggle(function() {
+        /* the first time we click the enable button, enable
+         * the pucks to be draggable */
         enableDraggables();
+        /* keeps the puck from getting moved by the server
+         *  while we're dragging it */
         g_LockWaypointId = selectedRobotId();
+        /* Change the label to 'Disable' */
         $(this).button('option', 'label', 'Disable');
         g_Enabled = true;
     }, function() {
+        /* when we click again, disable the draggable pucks */
         disableDraggables();
+        /* Change the label to 'Enable' */
         $(this).button('option', 'label', 'Enable');
         g_Enabled = false;
     });
-    
+
+    /* set up the click event handler for the tank image */
     $("#XY").unbind("click").click(function(ev){
         if(g_Enabled)
         {
+            /* calculate the X and Y position that was clicked, relative
+             * to the container */
+            var x = ev.pageX - 0.5*$("#XY").width() - $("#XY").position().left;
+            var y = ev.pageY - 0.5*$("#XY").height() - $("#XY").position().top;
+
+            /* update the form values for the selected robot */
             var id = "#wp_" + selectedRobotId();
-            updateWaypointXY(id,
-                             ev.pageX - 0.5*$("#XY").width() - $("#XY").position().left,
-                             ev.pageY - 0.5*$("#XY").height() - $("#XY").position().top);
+            updateWaypointXY(id, x, y);
         }
     });
 
+    /* set up the click event handler for the depth slider */
     $("#Z").unbind("click").click(function(ev){
         if(g_Enabled)
         {
+            /* update the depth value for the selected robot */
             var id = "#zp_" + selectedRobotId();
             updateWaypointZ(id, ev.pageY - $("#Z").position().top - 0.5*$("#Z").height());
         }
     });
 
+    /* sets up the robot selection buttons as a jquery-ui styled button group */
     $("#robot_select").buttonset()
+    /* set the click event handlers for each of the robot select buttons */
     $("#robot_select input").each(function(){$(this).click(function(){
+        /* when we select a robot, don't let the server change it's waypoints,
+         * and update the form with the last known values */
         var id_num = idNumFromId($(this).attr('id'));
         g_LockWaypointId = id_num;
         updateWaypointForm(id_num);
     })});
 
+    /* set up the loop timer, but make sure we don't accidentally create two of
+     * them (this can happen if the page reloads, or if somehow this function
+     * gets called again for whatever reason) */
     if(g_HaveCounter == undefined)
     {
+        /* call doSend every g_SendPeriod milliseconds */
         window.setInterval(doSend, g_SendPeriod);
         g_HaveCounter = true;
     }
     
  });
 
+/* sends a request to the server for updated waypoints
+ * the response from the server will be a piece of javascript code
+ * that gets executed.  The code is a call to updateWaypoint for
+ * each of the four waypoints.
+ *   see app/views/waypoints/index.js.erb */
 function requestWaypoints()
 {
     $.ajax({
@@ -68,6 +99,9 @@ function requestWaypoints()
     });
 }
 
+/* same as requestWaypoints, but requests updated positions of the vehicles.
+ * In this case the code calls setPosition
+ *   see app/views/positions/index.js.erb */
 function requestPositions()
 {
     $.ajax({
