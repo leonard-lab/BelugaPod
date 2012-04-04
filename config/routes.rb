@@ -4,6 +4,7 @@ BelugaPod::Application.routes.draw do
   match '/joystick' => 'pages#joystick'
   match '/waypoint' => 'pages#waypoint'
   match '/ipc' => 'pages#ipc'
+  match '/sandbox' => 'pages#sandbox'
 
   resources :kinematics, :only => [:index, :new, :create, :show]
   resources :positions, :only => [:index, :new, :create, :show]

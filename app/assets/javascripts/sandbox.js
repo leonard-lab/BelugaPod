@@ -1,0 +1,1 @@
+function updateParamString(new_string){$("#param_string").text(new_string); }

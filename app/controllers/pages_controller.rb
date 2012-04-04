@@ -15,6 +15,11 @@ class PagesController < ApplicationController
     @waypoint = Waypoint.new(:id => 0, :x => 0, :y => 0, :z => 0)
   end
 
+  def sandbox
+    @param = Param.find(0).to_s
+  end
+
+
   def ipc_info
     @ipc_up = BelugaSocket.okay?
   end
