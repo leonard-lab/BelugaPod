@@ -32,7 +32,7 @@ class BelugaSocket
   def self.sock force_connect = false
     if force_connect || @sock.nil?
       @sock.close unless @sock.nil?
-      @sock = TCPsocket.open('127.0.0.1', 1234)
+      @sock = TCPSocket.open('127.0.0.1', 1234)
       @sock.wait(100)
       if @sock.ready?
         @sock.gets
